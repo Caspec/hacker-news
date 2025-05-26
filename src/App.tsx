@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { useHackerNews } from "./hooks/useHackerNews";
+import { StoryList } from "./components/StoryList";
+import { SortOrder } from "./components/SortOrder";
+import "./styles/main.scss";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { stories, users, isLoading } = useHackerNews();
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
+  const sortedStories = [...stories].sort((a, b) =>
+    sortOrder === "asc" ? a.score - b.score : b.score - a.score
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <h1>Top Hacker News Stories</h1>
+      <div className="sort-controls">
+        <SortOrder sortOrder={sortOrder} onChange={setSortOrder} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      {isLoading ? (
+        <p className="loading">Loading...</p>
+      ) : (
+        <StoryList stories={sortedStories} users={users} />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
