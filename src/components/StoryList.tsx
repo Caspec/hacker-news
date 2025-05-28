@@ -1,4 +1,3 @@
-import React from "react";
 import type { Story } from "../models/story";
 import type { User } from "../models/user";
 import { StoryCard } from "./StoryCard";
@@ -8,8 +7,7 @@ interface StoryListProps {
   stories: Story[];
   users: Record<string, User>;
 }
-
-export const StoryList: React.FC<StoryListProps> = ({ stories, users }) => {
+export const StoryList = ({ stories, users }: StoryListProps) => {
   return (
     <div className="story-list">
       {stories.map((story) => (

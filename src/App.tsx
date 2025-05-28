@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useHackerNews } from "./hooks/useHackerNews";
+import { useHackerNewsHook } from "./hooks/useHackerNewsHook";
 import { StoryList } from "./components/StoryList";
 import { SortOrder } from "./components/SortOrder";
 import "./styles/main.scss";
 
 function App() {
-  const { stories, users, isLoading } = useHackerNews();
+  const { stories, users, isLoading } = useHackerNewsHook();
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const sortedStories = [...stories].sort((a, b) =>
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Top Hacker News Stories</h1>
+      <h1>Top Hacker Nyheder</h1>
       <div className="sort-controls">
         <SortOrder sortOrder={sortOrder} onChange={setSortOrder} />
       </div>
