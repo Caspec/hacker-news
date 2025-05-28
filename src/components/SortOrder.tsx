@@ -7,7 +7,7 @@ type SortOrderProps = {
 
 export const SortOrder = ({ sortOrder, onChange }: SortOrderProps) => {
   return (
-    <label htmlFor="sortOrder" style={{ fontWeight: "bold", fontSize: "1rem" }}>
+    <label htmlFor="sortOrder">
       Sortér efter score:{" "}
       <select
         id="sortOrder"
