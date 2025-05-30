@@ -5,4 +5,5 @@ export interface Story {
   time: number;
   score: number;
   by: string;
+  type: string;
 }
